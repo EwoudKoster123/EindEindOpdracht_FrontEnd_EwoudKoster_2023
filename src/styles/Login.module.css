@@ -1,0 +1,40 @@
+* {
+    padding: 0rem;
+    margin: 0rem;
+}
+
+.error {
+    color: red;
+    font-size: 1rem;
+}
+
+.good {
+    color: green;
+    font-size: 1rem;
+    justify-content: center;
+}
+
+
+.layout {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #b7b7b7;
+    padding: 5rem;
+    max-width: auto;
+}
+
+.label {
+    display: block;
+}
+
+.button {
+    margin-left: 1rem;
+    border: solid gray;
+    background-color: white;
+}
+
+.button:hover {
+    border: solid green;
+    color: green;
+}

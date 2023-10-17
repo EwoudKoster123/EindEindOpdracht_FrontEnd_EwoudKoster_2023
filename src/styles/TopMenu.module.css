@@ -1,0 +1,23 @@
+.topmenu {
+    list-style-type: none;
+    margin: 0;
+    padding: 2px;
+    overflow: hidden;
+    background-color: lightblue;
+}
+
+.links {
+    float: left;
+}
+
+.links a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.links a:hover {
+    background-color: blue;
+}
