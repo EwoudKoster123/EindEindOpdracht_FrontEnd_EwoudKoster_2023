@@ -1,119 +1,150 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import styles from '../styles/FridgeRecipe.module.css';
-import FridgeRecipeSearch from "../components/FridgeRecipeSearch.js";
-import {Splide, SplideSlide} from "@splidejs/react-splide";
-import {Link, NavLink} from "react-router-dom";
 import styled from "styled-components";
-import whats_in_the_fridge from "../assets/whats_in_the_fridge.png"
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/splide/dist/css/splide.min.css";
+import { Link } from "react-router-dom";
+import FridgeRecipeSearch from "../components/FridgeRecipeSearch.js";
 import FridgeCard from "../components/FridgeCard";
+import whats_in_the_fridge from "../assets/whats_in_the_fridge.png";
 
 function FridgePage() {
-    const [frigdeData, setFridgeData] = useState(null);
+    const [fridgeData, setFridgeData] = useState(null);
     const [koelkast, setKoelkast] = useState('');
-    const [error, toggleError] = useState(false);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
-        async function getFridgeData() {
-            toggleError(false);
-
+        const getFridgeData = async () => {
+            setError(false);
             try {
-                const result = await axios.get(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${koelkast}&number=9&apiKey=58d9ee76861142d19ae15d8da98f6abf`);
-                console.log(result.data);
+                const result = await axios.get(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${koelkast}&number=9&apiKey=${process.env.REACT_APP_SPOONACULAR_API_KEY}`);
                 setFridgeData(result.data);
-
                 if (result.data.length === 0) {
-                    throw new SyntaxError(error);
+                    throw new Error("No recipes found");
                 }
-
             } catch (e) {
                 console.error(e);
-                toggleError(true);
+                setError(true);
             }
-        }
+        };
 
-        if (koelkast)
-            getFridgeData();
+        if (koelkast) getFridgeData();
     }, [koelkast]);
-
 
     return (
         <>
+            <Main>
+                <Section>
+                    <Title>Wat heeft u nog in de koelkast?</Title>
+                </Section>
+                <Section>
+                    <FridgeCard image={whats_in_the_fridge} />
+                </Section>
+                <Section>
+                    <FridgeRecipeSearch setFridgeHandler={setKoelkast} />
+                </Section>
 
-            <main>
-                <section>
-                    <p>Wat heeft u nog in de koelkast?</p>
-                </section>
-                <section>
-                        <FridgeCard
-                            image={whats_in_the_fridge}
-                        />
-                </section>
-                <section>
-                    <FridgeRecipeSearch setFrigdeHandler={setKoelkast}/>
-                </section>
+                {error && (
+                    <ErrorMessage>Er zijn geen recepten gevonden. Probeer het opnieuw.</ErrorMessage>
+                )}
 
-                {error && <>
-                    <div>
-                        <p>
-                            Er zijn geen recepten gevonden. Probeer het opnieuw.
-                        </p>
-                    </div></> }
-
-                {frigdeData && <>
-                    <div>
-                        <Wrapper>
-                            <h3>Hier zijn de gevonden resultaten.</h3>
-                            <Splide options={{
-                                perPage: 4,
-                                arrows: false,
-                                pagination: false,
-                                drag: 'free',
-                                gap: "5rem"
-                            }}
-                            >
-                                {frigdeData.map((Koelkastlist) => {
-                                    return(
-                                        <SplideSlide key={Koelkastlist.id}>
-                                            <Card key={Koelkastlist.id}>
-                                                <Link to={'/recipe/' + Koelkastlist.id}>
-                                                    <p className={styles["p-fridge"]}>{Koelkastlist.title}</p>
-                                                    <img className={styles["img-fridge"]} src={Koelkastlist.image} alt="" />
-
-                                                </Link>
-                                            </Card>
-                                        </SplideSlide>
-                                    )
-                                })}
-                            </Splide>
-                        </Wrapper>
-                    </div>
-                </>
-                }
-            </main>
-
-
-
+                {fridgeData && (
+                    <Results>
+                        <ResultsTitle>Hier zijn de gevonden resultaten.</ResultsTitle>
+                        <Splide options={{
+                            perPage: 4,
+                            arrows: false,
+                            pagination: false,
+                            drag: 'free',
+                            gap: "2rem"
+                        }}>
+                            {fridgeData.map((recipe) => (
+                                <SplideSlide key={recipe.id}>
+                                    <Card>
+                                        <StyledLink to={`/recipe/${recipe.id}`}>
+                                            <CardTitle>{recipe.title}</CardTitle>
+                                            <CardImage src={recipe.image} alt={recipe.title} />
+                                        </StyledLink>
+                                    </Card>
+                                </SplideSlide>
+                            ))}
+                        </Splide>
+                    </Results>
+                )}
+            </Main>
         </>
     );
 }
 
-const Grid = styled.div`
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(20rem, 1rf));
-grid-gap: 3rem;
+// Styled components
+const Main = styled.main`
+  padding: 2rem;
+  background-color: #f9f9f9;
 `;
 
-const Wrapper = styled.div`
-  margin: 4rem 0rem;
-`
+const Section = styled.section`
+  margin-bottom: 2rem;
+`;
+
+const Title = styled.h1`
+  font-size: 2rem;
+  text-align: center;
+  color: #333;
+`;
+
+const ErrorMessage = styled.p`
+    color: red;
+    text-align: center;
+    font-weight: bold;
+`;
+
+const Results = styled.div`
+    margin-top: 2rem;
+`;
+
+const ResultsTitle = styled.h3`
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+    text-align: center;
+`;
 
 const Card = styled.div`
-  min-height: 25rem;
-  border-radius: 2rem;
-  overflow: hidden;
-  position: relative;
+    min-height: 25rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
 `;
 
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    display: block;
+    height: 100%;
+`;
+
+const CardTitle = styled.p`
+    font-size: 1rem;
+    margin: 0;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+`;
+
+const CardImage = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+`;
 
 export default FridgePage;

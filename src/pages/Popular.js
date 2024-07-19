@@ -1,86 +1,137 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
-import {Splide, SplideSlide} from '@splidejs/react-splide';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 import "@splidejs/splide/dist/css/splide.min.css";
-import {Link} from "react-router-dom";
-import styles from "../styles/Popular.module.css"
+import { Link } from "react-router-dom";
+// import "../styles/Popular.css"; // Verplaats CSS naar een specifiek bestand
 
+const API_KEY = process.env.REACT_APP_SPOONACULAR_API_KEY;
 
 function Popular() {
     const [popular, setPopular] = useState([]);
-    const [error, toggleError] = useState(false);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
-        getPopular();
+        fetchPopularRecipes();
     }, []);
 
-    const getPopular = async () => {
+    const fetchPopularRecipes = async () => {
         try {
-        const check = localStorage.getItem('popular');
-
-        if(check){
-            setPopular(JSON.parse(check));
-        }else{
-            const api = await fetch('https://api.spoonacular.com/recipes/random?apiKey=58d9ee76861142d19ae15d8da98f6abf&number=9')
-            const data = await api.json();
-            localStorage.setItem('popular', JSON.stringify(data.recipes));
-            setPopular(data.recipes)
-        }
-        } catch (e) {
-            console.error(e);
-            toggleError(true);
+            const cachedRecipes = localStorage.getItem('popular');
+            if (cachedRecipes) {
+                setPopular(JSON.parse(cachedRecipes));
+            } else {
+                const response = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${API_KEY}&number=9`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                localStorage.setItem('popular', JSON.stringify(data.recipes));
+                setPopular(data.recipes);
+            }
+        } catch (error) {
+            console.error('Fetching popular recipes failed:', error);
+            setError(true);
         }
     };
 
     return (
-        <div>
-            {error && <> <p>Geen recepten gevonden. Probeer opnieuw.</p></>}
+        <Container>
+            {error && <ErrorMessage>Geen recepten gevonden. Probeer opnieuw.</ErrorMessage>}
             <Wrapper>
-                <h3>Populaire keuzes</h3>
+                <Title>Populaire keuzes</Title>
                 <Splide options={{
                     perPage: 4,
                     arrows: false,
                     pagination: false,
                     drag: 'free',
-                    gap: "5rem",
-                }}
-                >
-                    {popular.map((recipe) => {
-                        return (
-                            <SplideSlide key={recipe.id}>
-                                <Card>
-                                    <Link to={'/recipe/' + recipe.id}>
-                                    <p className={styles["p-popular"]}>{recipe.title}</p>
-                                    <img className={styles["img-popular"]} src={recipe.image} alt={recipe.title}/>
+                    gap: "2rem",
+                }}>
+                    {popular.map((recipe) => (
+                        <SplideSlide key={recipe.id}>
+                            <Card>
+                                <StyledLink to={'/recipe/' + recipe.id}>
+                                    <RecipeTitle>{recipe.title}</RecipeTitle>
+                                    <RecipeImage src={recipe.image} alt={recipe.title} />
                                     <Gradient />
-                                    </Link>
-                                </Card>
-                            </SplideSlide>
-                        );
-                    })}
+                                </StyledLink>
+                            </Card>
+                        </SplideSlide>
+                    ))}
                 </Splide>
             </Wrapper>
-        </div>
+        </Container>
     );
 }
 
+// Styled components
+const Container = styled.div`
+  padding: 2rem 0;
+  background: #f9f9f9;
+`;
+
 const Wrapper = styled.div`
-    margin: 4rem 0rem;
-`
+  margin: 2rem auto;
+  max-width: 1200px;
+`;
 
-const Card = styled.div` 
-      min-height: 25rem;
-      border-radius: 2rem;
-      overflow: hidden;
-      position: relative;
-    `;
+const Title = styled.h3`
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+`;
 
-const Gradient = styled.div `
-  z-index: 3;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(rgba(0,0,0,0), rgba(1,0,0,0.5));
-`
+const Card = styled.div`
+    min-height: 20rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+`;
+
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    display: block;
+    height: 100%;
+`;
+
+const RecipeTitle = styled.p`
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    text-align: center;
+    font-size: 1.2rem;
+`;
+
+const RecipeImage = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+`;
+
+const Gradient = styled.div`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+`;
+
+const ErrorMessage = styled.p`
+    text-align: center;
+    color: red;
+    font-weight: bold;
+`;
 
 export default Popular;

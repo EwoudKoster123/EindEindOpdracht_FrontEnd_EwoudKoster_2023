@@ -1,9 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import styles from '../styles/Cuisine.module.css';
-import CousineSearch from "../components/CuisineSearch";
-import {Splide, SplideSlide} from "@splidejs/react-splide";
-import {Link, useParams} from "react-router-dom";
+import CuisineSearch from "../components/CuisineSearch";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 function ChooseCuisine() {
@@ -30,113 +29,131 @@ function ChooseCuisine() {
             }
         }
 
-        if (keukens)
-            getCuisineData();
+        if (keukens) getCuisineData();
     }, [keukens]);
-
 
     return (
         <>
-
-            <main>
-                <section>
-                    <p>
-                        Europees:
-                        <list>
-                            Eastern European, European, French, German, Greek, Irish, Italian, Nordic and
-                            Spanish
-                        </list>
-                    </p>
-                    <p>
-                        Aziatisch:
-                        <list>
-                            Chinese, Indian, Japanese, Korean, Middle
-                            Eastern, Thai and Vietnamese
-                        </list>
-                    </p>
-                    <p>
-                        Noord-Amerikaans:
-                        <list>
-                            Caribbean
-                        </list>
-                    </p>
-                    <p>
-                        Zuid-Amerikaans:
-                        <list>
-                            Latin American
-                        </list>
-                    </p>
-
-                    <p>
-                        Overig:
-                        <list>
-                            African, Mediterranean and Jewish
-                        </list>
-                    </p>
-
-                </section>
-                <section>
-                    <CousineSearch setCuisineSearchHandler={setCuisine}/>
-                </section>
-                {error && <>
-                    <div><p>Geen recepten gevonden. Probeer opnieuw.</p></div>
-                </>}
-
-                {cuisineData && <>
-
-                            <div>
-                                <Wrapper>
-                                    <h3>Hier zijn de gevonden resultaten.</h3>
-                                    <Splide options={{
-                                        perPage: 4,
-                                        arrows: false,
-                                        pagination: false,
-                                        drag: 'free',
-                                        gap: "5rem"
-                                    }}
-                                    >
-                                        {cuisineData.results.map((keukenList) => {
-                                            return(
-                                                <SplideSlide key={keukenList.id}>
-                                                    <Card key={keukenList.id}>
-                                                        <Link to={'/recipe/' + keukenList.id}>
-                                                            <p className={styles["p-cuisine"]}>{keukenList.title}</p>
-                                                            <img className={styles["img-cuisine"]} src={keukenList.image} alt="" />
-
-                                                        </Link>
-                                                    </Card>
-                                                </SplideSlide>
-                                            )
-                                        })
-                                        }
-                                    </Splide>
-                                </Wrapper>
-                            </div>
-                </>
-                }
-
-            </main>
-
-
+            <Main>
+                <CuisineSection>
+                    <CuisineCategory title="Europees" cuisines={[
+                        "Eastern European", "European", "French", "German", "Greek", "Irish", "Italian", "Nordic", "Spanish"
+                    ]} />
+                    <CuisineCategory title="Aziatisch" cuisines={[
+                        "Chinese", "Indian", "Japanese", "Korean", "Middle Eastern", "Thai", "Vietnamese"
+                    ]} />
+                    <CuisineCategory title="Noord-Amerikaans" cuisines={[
+                        "Caribbean"
+                    ]} />
+                    <CuisineCategory title="Zuid-Amerikaans" cuisines={[
+                        "Latin American"
+                    ]} />
+                    <CuisineCategory title="Overig" cuisines={[
+                        "African", "Mediterranean", "Jewish"
+                    ]} />
+                </CuisineSection>
+                <SearchSection>
+                    <CuisineSearch setCuisineSearchHandler={setCuisine} />
+                </SearchSection>
+                {error && <ErrorMessage>Geen recepten gevonden. Probeer opnieuw.</ErrorMessage>}
+                {cuisineData && (
+                    <ResultSection>
+                        <Wrapper>
+                            <h3>Hier zijn de gevonden resultaten.</h3>
+                            <Splide options={{
+                                perPage: 4,
+                                arrows: false,
+                                pagination: false,
+                                drag: 'free',
+                                gap: "5rem"
+                            }}>
+                                {cuisineData.results.map((keukenList) => (
+                                    <SplideSlide key={keukenList.id}>
+                                        <Card>
+                                            <Link to={'/recipe/' + keukenList.id}>
+                                                <RecipeTitle>{keukenList.title}</RecipeTitle>
+                                                <RecipeImage src={keukenList.image} alt={keukenList.title} />
+                                            </Link>
+                                        </Card>
+                                    </SplideSlide>
+                                ))}
+                            </Splide>
+                        </Wrapper>
+                    </ResultSection>
+                )}
+            </Main>
         </>
     );
 }
 
-const Grid = styled.div`
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(20rem, 1rf));
-grid-gap: 3rem;
+const CuisineCategory = ({ title, cuisines }) => (
+    <CuisineParagraph>
+        {title}:
+        <CuisineList>
+            <CuisineItem>
+                {cuisines.map(cuisine => (
+                    <span key={cuisine}>{cuisine}, </span>
+                ))}
+            </CuisineItem>
+        </CuisineList>
+    </CuisineParagraph>
+);
+
+const Main = styled.main`
+  padding: 2rem;
+`;
+
+const CuisineSection = styled.section`
+  margin-bottom: 2rem;
+`;
+
+const SearchSection = styled.section`
+    margin-bottom: 2rem;
+`;
+
+const ResultSection = styled.section``;
+
+const CuisineParagraph = styled.p`
+    margin: 1rem 0;
+`;
+
+const CuisineList = styled.ul`
+    list-style: none;
+    padding: 0;
+`;
+
+const CuisineItem = styled.li`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 `;
 
 const Wrapper = styled.div`
-  margin: 4rem 0rem;
-`
+    margin: 4rem 0rem;
+`;
 
 const Card = styled.div`
-  min-height: 25rem;
-  border-radius: 2rem;
-  overflow: hidden;
-  position: relative;
+    min-height: 25rem;
+    border-radius: 2rem;
+    overflow: hidden;
+    position: relative;
+`;
+
+const RecipeTitle = styled.p`
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+`;
+
+const RecipeImage = styled.img`
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+`;
+
+const ErrorMessage = styled.p`
+    color: red;
+    text-align: center;
 `;
 
 export default ChooseCuisine;
