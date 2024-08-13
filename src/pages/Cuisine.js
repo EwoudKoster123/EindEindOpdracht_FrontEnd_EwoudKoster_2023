@@ -3,7 +3,7 @@ import axios from 'axios';
 import CuisineSearch from "../components/CuisineSearch";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+
 
 function ChooseCuisine() {
     const [cuisineData, setCuisineData] = useState(null);
@@ -34,8 +34,8 @@ function ChooseCuisine() {
 
     return (
         <>
-            <Main>
-                <CuisineSection>
+            <main className="main">
+                <section className="cuisine-section">
                     <CuisineCategory title="Europees" cuisines={[
                         "Eastern European", "European", "French", "German", "Greek", "Irish", "Italian", "Nordic", "Spanish"
                     ]} />
@@ -51,14 +51,14 @@ function ChooseCuisine() {
                     <CuisineCategory title="Overig" cuisines={[
                         "African", "Mediterranean", "Jewish"
                     ]} />
-                </CuisineSection>
-                <SearchSection>
+                </section>
+                <section className="search-section">
                     <CuisineSearch setCuisineSearchHandler={setCuisine} />
-                </SearchSection>
-                {error && <ErrorMessage>Geen recepten gevonden. Probeer opnieuw.</ErrorMessage>}
+                </section>
+                {error && <p className="error-message">Geen recepten gevonden. Probeer opnieuw.</p>}
                 {cuisineData && (
-                    <ResultSection>
-                        <Wrapper>
+                    <section className="result-section">
+                        <div className="wrapper">
                             <h3>Hier zijn de gevonden resultaten.</h3>
                             <Splide options={{
                                 perPage: 4,
@@ -69,91 +69,34 @@ function ChooseCuisine() {
                             }}>
                                 {cuisineData.results.map((keukenList) => (
                                     <SplideSlide key={keukenList.id}>
-                                        <Card>
+                                        <div className="card">
                                             <Link to={'/recipe/' + keukenList.id}>
-                                                <RecipeTitle>{keukenList.title}</RecipeTitle>
-                                                <RecipeImage src={keukenList.image} alt={keukenList.title} />
+                                                <p className="recipe-title">{keukenList.title}</p>
+                                                <img className="recipe-image" src={keukenList.image} alt={keukenList.title} />
                                             </Link>
-                                        </Card>
+                                        </div>
                                     </SplideSlide>
                                 ))}
                             </Splide>
-                        </Wrapper>
-                    </ResultSection>
+                        </div>
+                    </section>
                 )}
-            </Main>
+            </main>
         </>
     );
 }
 
 const CuisineCategory = ({ title, cuisines }) => (
-    <CuisineParagraph>
+    <p className="cuisine-paragraph">
         {title}:
-        <CuisineList>
-            <CuisineItem>
+        <ul className="cuisine-list">
+            <li className="cuisine-item">
                 {cuisines.map(cuisine => (
                     <span key={cuisine}>{cuisine}, </span>
                 ))}
-            </CuisineItem>
-        </CuisineList>
-    </CuisineParagraph>
+            </li>
+        </ul>
+    </p>
 );
-
-const Main = styled.main`
-  padding: 2rem;
-`;
-
-const CuisineSection = styled.section`
-  margin-bottom: 2rem;
-`;
-
-const SearchSection = styled.section`
-    margin-bottom: 2rem;
-`;
-
-const ResultSection = styled.section``;
-
-const CuisineParagraph = styled.p`
-    margin: 1rem 0;
-`;
-
-const CuisineList = styled.ul`
-    list-style: none;
-    padding: 0;
-`;
-
-const CuisineItem = styled.li`
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-`;
-
-const Wrapper = styled.div`
-    margin: 4rem 0rem;
-`;
-
-const Card = styled.div`
-    min-height: 25rem;
-    border-radius: 2rem;
-    overflow: hidden;
-    position: relative;
-`;
-
-const RecipeTitle = styled.p`
-    font-size: 1rem;
-    font-weight: bold;
-    color: #333;
-`;
-
-const RecipeImage = styled.img`
-    width: 100%;
-    height: auto;
-    border-radius: 1rem;
-`;
-
-const ErrorMessage = styled.p`
-    color: red;
-    text-align: center;
-`;
 
 export default ChooseCuisine;

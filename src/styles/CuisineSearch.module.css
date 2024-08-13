@@ -22,3 +22,60 @@ svg {
     transform: translate(100%, -50%);
     color: white;
 }
+
+/* ChooseCuisine.css */
+
+.main {
+    padding: 2rem;
+}
+
+.cuisine-section {
+    margin-bottom: 2rem;
+}
+
+.search-section {
+    margin-bottom: 2rem;
+}
+
+.cuisine-paragraph {
+    margin: 1rem 0;
+}
+
+.cuisine-list {
+    list-style: none;
+    padding: 0;
+}
+
+.cuisine-item {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.wrapper {
+    margin: 4rem 0rem;
+}
+
+.card {
+    min-height: 25rem;
+    border-radius: 2rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.recipe-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.recipe-image {
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+}

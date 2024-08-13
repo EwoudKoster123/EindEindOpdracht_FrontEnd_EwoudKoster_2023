@@ -1,5 +1,4 @@
-import './App.css';
-import './App.css';
+import './styles/App.css';
 import React, {useContext} from "react";
 import {AuthContext} from "./context/AuthContext";
 import Home from "./pages/Home";

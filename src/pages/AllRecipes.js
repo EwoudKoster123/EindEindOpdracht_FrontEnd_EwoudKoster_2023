@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import styled from "styled-components";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { Link } from "react-router-dom";
 import Search from "../components/Search";
@@ -41,7 +40,7 @@ function AllRecipes() {
             <div>
                 <Search />
                 {error && <p>Geen recepten gevonden. Probeer opnieuw.</p>}
-                <Wrapper>
+                <div className="wrapper">
                     <h3>Alle Recepten</h3>
                     <Splide options={{
                         perPage: 4,
@@ -52,39 +51,20 @@ function AllRecipes() {
                     }}>
                         {allrecipes.map((recipe) => (
                             <SplideSlide key={recipe.id}>
-                                <Card>
+                                <div className="card">
                                     <Link to={'/recipe/' + recipe.id}>
                                         <p className={styles["p-allrecipes"]}>{recipe.title}</p>
                                         <img className={styles["img-allrecipes"]} src={recipe.image} alt={recipe.title} />
-                                        <Gradient />
+                                        <div className="gradient" />
                                     </Link>
-                                </Card>
+                                </div>
                             </SplideSlide>
                         ))}
                     </Splide>
-                </Wrapper>
+                </div>
             </div>
         </main>
     );
 }
-
-const Wrapper = styled.div`
-  margin: 4rem 0rem;
-`;
-
-const Card = styled.div`
-  min-height: 25rem;
-  border-radius: 2rem;
-  overflow: hidden;
-  position: relative;
-`;
-
-const Gradient = styled.div`
-  z-index: 3;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));
-`;
 
 export default AllRecipes;
