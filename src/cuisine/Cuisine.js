@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import CuisineSearch from "../components/CuisineSearch";
+import CuisineSearch from "../cuisine-search/CuisineSearch";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { Link } from "react-router-dom";
+import './Cuisine.module.css';
 
 
 function ChooseCuisine() {

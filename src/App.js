@@ -1,19 +1,19 @@
-import './styles/App.css';
+import './App.css';
 import React, {useContext} from "react";
-import {AuthContext} from "./context/AuthContext";
-import Home from "./pages/Home";
-import Popular from "./pages/Popular";
-import AllRecipes from "./pages/AllRecipes";
-import Searched from "./pages/Searched";
-import Recipe from "./pages/Recipe";
-import Profile from "./pages/Profile";
-import Signup from "./pages/Signup";
+import {AuthContext} from "./auth context/AuthContext";
+import Home from "./home/Home";
+import Popular from "./popular/Popular";
+import AllRecipes from "./all-recipies/AllRecipes";
+import Searched from "./searched/Searched";
+import Recipe from "./recipe/Recipe";
+import Profile from "./profile/Profile";
+import Signup from "./signup/Signup";
 import {Route, Switch, Redirect} from "react-router-dom";
-import Login from "./pages/Loginpage";
-import TopMenu from "./components/TopMenu";
-import QuestionRecipe from "./pages/QuestionRecipe";
-import FridgeRecipe from "./pages/FridgeRecipe";
-import Cuisine from "./pages/Cuisine";
+import Login from "./login/Loginpage";
+import TopMenu from "./topmenu/TopMenu";
+import QuestionRecipe from "./question-recipe/QuestionRecipe";
+import FridgeRecipe from "./fridge-recipe/FridgeRecipe";
+import Cuisine from "./cuisine/Cuisine";
 
 function App() {
 

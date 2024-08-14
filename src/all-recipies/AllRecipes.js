@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { Link } from "react-router-dom";
-import Search from "../components/Search";
+import Search from "../search/Search";
 import "@splidejs/splide/dist/css/splide.min.css";
-import styles from "../styles/AllRecipes.module.css";
+import styles from "./AllRecipes.module.css";
 
 const API_KEY = process.env.REACT_APP_SPOONACULAR_API_KEY;
 

@@ -1,37 +1,51 @@
-import React, { useContext, useState } from 'react';
-import { Link, useHistory } from "react-router-dom";
+import React, { useState } from 'react';
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { AuthContext } from "../context/AuthContext";
+import './Signup.module.css';
 
-function LoginPage() {
-    const { login } = useContext(AuthContext);
+function Signup() {
+    const [email, setEmail] = useState('');
     const [userName, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [user, setRole] = useState('');
+
     const history = useHistory();
 
-    async function handleSubmit(e) {
+    async function SignUpUser(e) {
         e.preventDefault();
         try {
-            const response = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signin', {
+            const response = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signup', {
                 "username": userName,
+                "email": email,
                 "password": password,
+                "role": [user]
             });
-            login(response);
-            history.push("/profile");
+            console.log(response);
+            history.push("/login");
         } catch (e) {
-            console.error(e.response);
+            console.error(e);
         }
     }
 
     return (
         <>
-            <Form onSubmit={handleSubmit}>
-                <Label htmlFor="login-username">
+            <Form onSubmit={SignUpUser}>
+                <Label htmlFor="email">
+                    Email:
+                    <Input
+                        type="email"
+                        id="email"
+                        onChange={(e) => setEmail(e.target.value)}
+                        value={email}
+                        placeholder="Fill in your email"
+                    />
+                </Label>
+                <Label htmlFor="username">
                     Username:
                     <Input
                         type="text"
-                        id="login-username"
+                        id="username"
                         onChange={(e) => setUsername(e.target.value)}
                         value={userName}
                         placeholder="Fill in your username"
@@ -39,28 +53,35 @@ function LoginPage() {
                     {userName.length < 6 && <ErrorMessage>Your username isn't long enough</ErrorMessage>}
                     {userName.length >= 6 && <GoodMessage>Your username is long enough</GoodMessage>}
                 </Label>
-
-                <Label htmlFor="login-password">
+                <Label htmlFor="password">
                     Password:
                     <Input
                         type="password"
-                        id="login-password"
+                        id="password"
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
-                        placeholder="Fill in your password"
+                        placeholder="Your password"
                     />
                     {password.length < 6 && <ErrorMessage>Your password isn't long enough</ErrorMessage>}
                     {password.length >= 6 && <GoodMessage>Your password is long enough</GoodMessage>}
                 </Label>
-
-                <Button type="submit">Login</Button>
+                <Label htmlFor="role">
+                    Role:
+                    <Input
+                        type="text"
+                        id="role"
+                        onChange={(e) => setRole(e.target.value)}
+                        value={user}
+                        placeholder="user or admin"
+                    />
+                </Label>
+                <Button type="submit">Register</Button>
             </Form>
-
-            <SignupPrompt>Heeft u geen account? <StyledLink to="/signup">Signup</StyledLink> dan.</SignupPrompt>
         </>
     );
 }
 
+// Styled components
 const Form = styled.form`
     display: flex;
     flex-direction: column;
@@ -114,17 +135,4 @@ const Button = styled.button`
     }
 `;
 
-const SignupPrompt = styled.p`
-    margin-top: 1rem;
-    text-align: center;
-`;
-
-const StyledLink = styled(Link)`
-    color: #007BFF;
-    text-decoration: none;
-    &:hover {
-        text-decoration: underline;
-    }
-`;
-
-export default LoginPage;
+export default Signup;

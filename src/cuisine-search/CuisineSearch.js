@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import styles from '../styles/CuisineSearch.module.css';
+import styles from './CuisineSearch.module.css';
 import styled from "styled-components";
+import './CuisineSearch.module.css';
 
 function SearchBar({setCuisineSearchHandler}) {
     const [cuisine, setCuisine] = useState('');

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styles from '../styles/FridgeRecipeSearch.module.css';
+import styles from './FridgeRecipeSearch.module.css';
 import styled from "styled-components";
 
 function SearchBarFridge({setFrigdeHandler}) {

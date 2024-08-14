@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import styles from "../styles/TopMenu.module.css"
+import styles from "./TopMenu.module.css"
 
 function TopMenu() {
     return (

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import "@splidejs/splide/dist/css/splide.min.css";
 import { Link } from "react-router-dom";
+import './Popular.module.css';
 
 const API_KEY = process.env.REACT_APP_SPOONACULAR_API_KEY;
 

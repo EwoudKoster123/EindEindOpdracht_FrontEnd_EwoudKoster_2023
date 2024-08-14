@@ -5,8 +5,8 @@ import whats_in_the_fridge from "../assets/whats_in_the_fridge.png"
 import all_recepies from "../assets/world_cuisines.png"
 import mostpopular from "../assets/mostpopular.png"
 import lifting_the_mood_with_good_food from "../assets/lifting_the_mood_with_food.png"
-import styles from "../styles/Home.module.css"
-import HomeCard from "../components/HomeCard";
+import styles from "./Home.module.css"
+import HomeCard from "../homecard/HomeCard";
 
 function Home() {
     return (

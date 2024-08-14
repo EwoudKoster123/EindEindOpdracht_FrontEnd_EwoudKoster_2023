@@ -3,10 +3,10 @@ import axios from "axios";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 import { Link } from "react-router-dom";
-import FridgeRecipeSearch from "../components/FridgeRecipeSearch.js";
+import FridgeRecipeSearch from "../fridge-recipe-search/FridgeRecipeSearch.js";
 import FridgeCard from "../components/FridgeCard";
 import whats_in_the_fridge from "../assets/whats_in_the_fridge.png";
-import "../styles/FridgeRecipe.module.css";
+import "./FridgeRecipe.module.css";
 
 function FridgePage() {
     const [fridgeData, setFridgeData] = useState(null);

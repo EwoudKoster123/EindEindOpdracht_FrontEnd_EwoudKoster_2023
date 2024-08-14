@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import styles from '../styles/QuestionRecipeSearch.module.css'
+import styles from '../question-recipe/QuestionRecipeSearch.module.css'
 import styled from "styled-components";
 
 function QuestionRecipeSearch({setQuestionHandler}) {

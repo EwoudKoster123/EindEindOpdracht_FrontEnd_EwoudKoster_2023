@@ -5,6 +5,8 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 import { Link } from "react-router-dom";
 import QuestionRecipeSearch from "../components/QuestionRecipeSearch";
+import './QuestionRecipe.module.css';
+import './QuestionRecipeSearch.module.css';
 
 function QuestionRecipe() {
     const [questionData, setQuestionData] = useState(null);

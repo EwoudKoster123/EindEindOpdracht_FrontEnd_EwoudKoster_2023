@@ -1,5 +1,5 @@
 import React from "react";
-import styles from '../styles/HomeCard.module.css'
+import './HomeCard.module.css'
 
 function HomeCard ({title, image, description}) {
     return (

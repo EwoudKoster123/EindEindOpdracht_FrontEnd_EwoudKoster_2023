@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
-import styles from "../styles/Search.module.css"
+import styles from "./Search.module.css"
 
 function Search() {
 

@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import styled from "styled-components";
 import {useParams} from "react-router-dom";
-import styles from "../styles/Recipe.module.css";
+import styles from "./Recipe.module.css";
 
 import React from "react";
 

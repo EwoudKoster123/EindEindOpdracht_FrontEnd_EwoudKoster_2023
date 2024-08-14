@@ -2,9 +2,9 @@ import React from "react";
 import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import styled from "styled-components"
-import Search from "../components/Search";
+import Search from "../search/Search";
 import {Splide, SplideSlide} from "@splidejs/react-splide";
-import styles from "../styles/Searched.module.css";
+import styles from "./Searched.module.css";
 
 function Searched() {
     const [searchedRecipes, setSearchedRecipes] = useState([]);

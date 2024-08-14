@@ -29,7 +29,7 @@ gebruiker zou hier problemen mee hebben.
 1. De API key is niet nodig want deze zit er automatisch al bij.
 2. Open je webbrowser en typ htpps://nodejs.org/en/ in of kopieer
    deze uit dit document en plak het in je webbrowser.
-3. Als je op de site van nodejs bent aangekomen moet je nodejs natuurlijk\
+3. Als je op de site van nodejs bent aangekomen moet je nodejs natuurlijk.
    downloaden. Dit doe je door dubbel te klikken op de linker download button.
 4. Als je dit proces hebt doorlopen kan je het project in webstorm openen.
 5. Als het goed is kan je dan "npm start" in de console intypen die zich
