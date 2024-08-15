@@ -36,32 +36,41 @@ function AllRecipes() {
     }, []);
 
     return (
-        <main>
-            <div>
+        <main className={styles.main}>
+            <div className={styles["search-container"]}>
                 <Search />
-                {error && <p>Geen recepten gevonden. Probeer opnieuw.</p>}
-                <div className="wrapper">
-                    <h3>Alle Recepten</h3>
-                    <Splide options={{
+            </div>
+            {error && <p className={styles.error}>Geen recepten gevonden. Probeer opnieuw.</p>}
+            <div className={styles.wrapper}>
+                <h3 className={styles.title}>Alle Recepten</h3>
+                <Splide
+                    options={{
                         perPage: 4,
-                        arrows: false,
+                        arrows: true,
                         pagination: false,
                         drag: 'free',
-                        gap: "5rem",
-                    }}>
-                        {allrecipes.map((recipe) => (
-                            <SplideSlide key={recipe.id}>
-                                <div className="card">
-                                    <Link to={'/recipe/' + recipe.id}>
-                                        <p className={styles["p-allrecipes"]}>{recipe.title}</p>
-                                        <img className={styles["img-allrecipes"]} src={recipe.image} alt={recipe.title} />
-                                        <div className="gradient" />
-                                    </Link>
-                                </div>
-                            </SplideSlide>
-                        ))}
-                    </Splide>
-                </div>
+                        gap: "2rem",
+                        breakpoints: {
+                            768: {
+                                perPage: 1,
+                                gap: '1rem',
+                            },
+                        },
+                    }}
+                    className={styles.splide}
+                >
+                    {allrecipes.map((recipe) => (
+                        <SplideSlide key={recipe.id}>
+                            <div className={styles.card}>
+                                <Link to={'/recipe/' + recipe.id}>
+                                    <img className={styles["img-allrecipes"]} src={recipe.image} alt={recipe.title} />
+                                    <div className={styles.gradient} />
+                                    <p className={styles["p-allrecipes"]}>{recipe.title}</p>
+                                </Link>
+                            </div>
+                        </SplideSlide>
+                    ))}
+                </Splide>
             </div>
         </main>
     );

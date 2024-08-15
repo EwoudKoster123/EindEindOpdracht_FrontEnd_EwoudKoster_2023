@@ -1,15 +1,25 @@
 import React, { useContext, useState } from 'react';
-import { Link, useHistory } from "react-router-dom";
+import {Link, Redirect, Route, Switch, useHistory} from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import { AuthContext } from "../auth context/AuthContext";
 import './Login.module.css';
+
 
 function LoginPage() {
     const { login } = useContext(AuthContext);
     const [userName, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const history = useHistory();
+
+
+    function RedirectButton() {
+        const history = useHistory();
+    }
+
+    function handleRedirect() {
+        history.push('/profile');
+    }
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -20,6 +30,8 @@ function LoginPage() {
             });
             login(response);
             history.push("/profile");
+
+
         } catch (e) {
             console.error(e.response);
         }
@@ -54,9 +66,11 @@ function LoginPage() {
                     {password.length >= 6 && <GoodMessage>Your password is long enough</GoodMessage>}
                 </Label>
 
-                <Button type="submit">Login</Button>
-            </Form>
+                <button className="login-button" type="button" onClick={handleRedirect}>
+                    Login
+                </button>
 
+            </Form>
             <SignupPrompt>Heeft u geen account? <StyledLink to="/signup">Signup</StyledLink> dan.</SignupPrompt>
         </>
     );
@@ -100,19 +114,6 @@ const GoodMessage = styled.p`
     color: green;
     margin-top: 0.5rem;
     font-size: 0.9rem;
-`;
-
-const Button = styled.button`
-    padding: 0.75rem 1.5rem;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    &:hover {
-        background-color: #0056b3;
-    }
 `;
 
 const SignupPrompt = styled.p`

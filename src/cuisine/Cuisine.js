@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import './Cuisine.module.css';
 
 
-function ChooseCuisine() {
+function Cuisine() {
     const [cuisineData, setCuisineData] = useState(null);
     const [keukens, setCuisine] = useState('');
     const [error, toggleError] = useState(false);
@@ -100,4 +100,4 @@ const CuisineCategory = ({ title, cuisines }) => (
     </p>
 );
 
-export default ChooseCuisine;
+export default Cuisine;
