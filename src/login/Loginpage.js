@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import {Link, useHistory} from "react-router-dom";
 import axios from "axios";
-import styled from "styled-components";
 import { AuthContext } from "../auth context/AuthContext";
 import styles from "./Login.module.css";
 
@@ -13,7 +12,7 @@ function LoginPage() {
     const history = useHistory();
 
 
-    function handleRedirect() {
+    function handleRedirectButton() {
         history.push('/profile');
     }
     function handleRedirectSignup() {
@@ -65,7 +64,7 @@ function LoginPage() {
                     {password.length >= 6 && <goodmessage className={styles["good-message"]}>Your password is long enough</goodmessage>}
                 </label>
 
-                <button className={styles["login-button"]} type="button" onClick={handleRedirect}>
+                <button className={styles["login-button"]} type="button" onClick={handleRedirectButton}>
                     Login
                 </button>
 

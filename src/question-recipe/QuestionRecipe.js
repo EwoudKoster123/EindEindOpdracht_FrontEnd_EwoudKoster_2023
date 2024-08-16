@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import QuestionRecipeSearch from "../components/QuestionRecipeSearch";
 import './QuestionRecipe.module.css';
 import './QuestionRecipeSearch.module.css';
+import styles from "../profile/Profile.module.css";
 
 function QuestionRecipe() {
     const [questionData, setQuestionData] = useState(null);
@@ -30,7 +31,7 @@ function QuestionRecipe() {
 
     return (
         <>
-            <Main>
+            <main className={styles["main"]}>
                 <Section>
                     <Prompt>Waar heeft u zin in? Kies uit:</Prompt>
                     <Options>bread, breakfast, dessert, drink, fingerfood snack, marinade, sauce, soup, beverage</Options>
@@ -64,16 +65,10 @@ function QuestionRecipe() {
                         </Splide>
                     </ResultsSection>
                 )}
-            </Main>
+            </main>
         </>
     );
 }
-
-// Styled components
-const Main = styled.main`
-  padding: 2rem;
-  background-color: #f9f9f9;
-`;
 
 const Section = styled.section`
   margin-bottom: 2rem;

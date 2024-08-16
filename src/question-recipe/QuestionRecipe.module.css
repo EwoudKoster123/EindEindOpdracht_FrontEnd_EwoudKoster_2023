@@ -6,7 +6,7 @@
     height: 100%;
     object-fit: cover;
 }
-a {
+.a {
     text-decoration: none;
 }
 .p-question {
@@ -24,4 +24,9 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.main{
+    padding: 2rem;
+    background-color: #f9f9f9;
 }

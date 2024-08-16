@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import "@splidejs/splide/dist/css/splide.min.css";
-import { Link } from "react-router-dom";
 import './Popular.module.css';
+import styles from "../login/Login.module.css";
+import {Link} from "react-router-dom";
 
 const API_KEY = process.env.REACT_APP_SPOONACULAR_API_KEY;
 
@@ -36,10 +37,10 @@ function Popular() {
     };
 
     return (
-        <Container>
-            {error && <ErrorMessage>Geen recepten gevonden. Probeer opnieuw.</ErrorMessage>}
-            <Wrapper>
-                <Title>Populaire keuzes</Title>
+        <container className={styles["container"]}>
+            {error && <errormessage className={styles["error-message"]}>Geen recepten gevonden. Probeer opnieuw.</errormessage>}
+            <wrapper className={styles["wrapper"]}>
+                <h3 className={styles["title"]}>Populaire keuzes</h3>
                 <Splide options={{
                     perPage: 4,
                     arrows: false,
@@ -49,52 +50,20 @@ function Popular() {
                 }}>
                     {popular.map((recipe) => (
                         <SplideSlide key={recipe.id}>
-                            <Card>
-                                <StyledLink to={'/recipe/' + recipe.id}>
-                                    <RecipeTitle>{recipe.title}</RecipeTitle>
-                                    <RecipeImage src={recipe.image} alt={recipe.title} />
-                                    <Gradient />
+                            <card className={styles["card-popular"]}>
+                                <StyledLink className={styles["styled-link"]} to={'/recipe/' + recipe.id}>
+                                    <RecipeTitle className={styles["recipe-title"]}>{recipe.title}</RecipeTitle>
+                                    <RecipeImage className={styles["recipe-image"]} src={recipe.image} alt={recipe.title} />
+                                    <gradient className={styles["gradient-popular"]} />
                                 </StyledLink>
-                            </Card>
+                            </card>
                         </SplideSlide>
                     ))}
                 </Splide>
-            </Wrapper>
-        </Container>
+            </wrapper>
+        </container>
     );
 }
-
-// Styled components
-const Container = styled.div`
-  padding: 2rem 0;
-  background: #f9f9f9;
-`;
-
-const Wrapper = styled.div`
-  margin: 2rem auto;
-  max-width: 1200px;
-`;
-
-const Title = styled.h3`
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  color: #333;
-`;
-
-const Card = styled.div`
-    min-height: 20rem;
-    border-radius: 1rem;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-
-    &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
-`;
 
 const StyledLink = styled(Link)`
     text-decoration: none;
@@ -110,7 +79,7 @@ const RecipeTitle = styled.p`
     margin: 0;
     padding: 1rem;
     background: rgba(0, 0, 0, 0.6);
-    color: #fff;
+    color: white;
     text-align: center;
     font-size: 1.2rem;
 `;
@@ -119,19 +88,6 @@ const RecipeImage = styled.img`
     width: 100%;
     height: 100%;
     object-fit: cover;
-`;
-
-const Gradient = styled.div`
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-`;
-
-const ErrorMessage = styled.p`
-    text-align: center;
-    color: red;
-    font-weight: bold;
 `;
 
 export default Popular;
