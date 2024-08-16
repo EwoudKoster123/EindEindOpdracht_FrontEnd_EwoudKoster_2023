@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
-import {Link, Redirect, Route, Switch, useHistory} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import { AuthContext } from "../auth context/AuthContext";
-import './Login.module.css';
+import styles from "./Login.module.css";
 
 
 function LoginPage() {
@@ -13,12 +13,11 @@ function LoginPage() {
     const history = useHistory();
 
 
-    function RedirectButton() {
-        const history = useHistory();
-    }
-
     function handleRedirect() {
         history.push('/profile');
+    }
+    function handleRedirectSignup() {
+        history.push('/signup');
     }
 
     async function handleSubmit(e) {
@@ -39,94 +38,43 @@ function LoginPage() {
 
     return (
         <>
-            <Form onSubmit={handleSubmit}>
-                <Label htmlFor="login-username">
+            <form className={styles["Form"]} onSubmit={handleSubmit}>
+                <label className={styles["Label-Username"]} htmlFor="login-username">
                     Username:
-                    <Input
+                    <input className={styles["input-username"]}
                         type="text"
                         id="login-username"
                         onChange={(e) => setUsername(e.target.value)}
                         value={userName}
                         placeholder="Fill in your username"
                     />
-                    {userName.length < 6 && <ErrorMessage>Your username isn't long enough</ErrorMessage>}
-                    {userName.length >= 6 && <GoodMessage>Your username is long enough</GoodMessage>}
-                </Label>
+                    {userName.length < 6 && <errormessage className={styles["error-message"]}>Your username isn't long enough</errormessage>}
+                    {userName.length >= 6 && <goodmessage className={styles["good-message"]}>Your username is long enough</goodmessage>}
+                </label>
 
-                <Label htmlFor="login-password">
+                <label className={styles["Label-Password"]} htmlFor="login-password">
                     Password:
-                    <Input
+                    <input className={styles["input-password"]}
                         type="password"
                         id="login-password"
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
                         placeholder="Fill in your password"
                     />
-                    {password.length < 6 && <ErrorMessage>Your password isn't long enough</ErrorMessage>}
-                    {password.length >= 6 && <GoodMessage>Your password is long enough</GoodMessage>}
-                </Label>
+                    {password.length < 6 && <errormessage className={styles["error-message"]}>Your password isn't long enough</errormessage>}
+                    {password.length >= 6 && <goodmessage className={styles["good-message"]}>Your password is long enough</goodmessage>}
+                </label>
 
-                <button className="login-button" type="button" onClick={handleRedirect}>
+                <button className={styles["login-button"]} type="button" onClick={handleRedirect}>
                     Login
                 </button>
 
-            </Form>
-            <SignupPrompt>Heeft u geen account? <StyledLink to="/signup">Signup</StyledLink> dan.</SignupPrompt>
+            </form>
+
+
+            <signupprompt onClick={handleRedirectSignup} className={styles["signup-prompt"]}>Heeft u geen account? Klik dan:<styledlink className={styles["styled-link"]}>Signup</styledlink></signupprompt>
         </>
     );
 }
-
-const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f9f9f9;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-`;
-
-const Label = styled.label`
-    margin-bottom: 1rem;
-    width: 100%;
-    max-width: 400px;
-`;
-
-const Input = styled.input`
-    width: 100%;
-    padding: 0.5rem;
-    margin-top: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    &:focus {
-        border-color: #007BFF;
-        outline: none;
-    }
-`;
-
-const ErrorMessage = styled.p`
-    color: red;
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
-`;
-
-const GoodMessage = styled.p`
-    color: green;
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
-`;
-
-const SignupPrompt = styled.p`
-    margin-top: 1rem;
-    text-align: center;
-`;
-
-const StyledLink = styled(Link)`
-    color: #007BFF;
-    text-decoration: none;
-    &:hover {
-        text-decoration: underline;
-    }
-`;
 
 export default LoginPage;
