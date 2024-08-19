@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import CuisineSearch from "../cuisine-search/CuisineSearch";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { Link } from "react-router-dom";
 import './Cuisine.module.css';
-
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import CuisineSearch from "../cuisine-search/CuisineSearch";
 
 function Cuisine() {
     const [cuisineData, setCuisineData] = useState(null);
@@ -37,26 +36,32 @@ function Cuisine() {
         <>
             <main className="main">
                 <section className="cuisine-section">
-                    <CuisineCategory title="Europees" cuisines={[
-                        "Eastern European", "European", "French", "German", "Greek", "Irish", "Italian", "Nordic", "Spanish"
-                    ]} />
-                    <CuisineCategory title="Aziatisch" cuisines={[
-                        "Chinese", "Indian", "Japanese", "Korean", "Middle Eastern", "Thai", "Vietnamese"
-                    ]} />
-                    <CuisineCategory title="Noord-Amerikaans" cuisines={[
-                        "Caribbean"
-                    ]} />
-                    <CuisineCategory title="Zuid-Amerikaans" cuisines={[
-                        "Latin American"
-                    ]} />
-                    <CuisineCategory title="Overig" cuisines={[
-                        "African", "Mediterranean", "Jewish"
-                    ]} />
+                    <div className="cuisine-grid">
+                        <CuisineCategory title="Europees" cuisines={[
+                            "Eastern European", "European", "French", "German", "Greek", "Irish", "Italian", "Nordic", "Spanish"
+                        ]} />
+                        <CuisineCategory title="Aziatisch" cuisines={[
+                            "Chinese", "Indian", "Japanese", "Korean", "Middle Eastern", "Thai", "Vietnamese"
+                        ]} />
+                        <CuisineCategory title="Noord-Amerikaans" cuisines={[
+                            "Caribbean"
+                        ]} />
+                        <CuisineCategory title="Zuid-Amerikaans" cuisines={[
+                            "Latin American"
+                        ]} />
+                        <CuisineCategory title="Overig" cuisines={[
+                            "African", "Mediterranean", "Jewish"
+                        ]} />
+                    </div>
                 </section>
+
                 <section className="search-section">
                     <CuisineSearch setCuisineSearchHandler={setCuisine} />
                 </section>
+
                 {error && <p className="error-message">Geen recepten gevonden. Probeer opnieuw.</p>}
+
+                {/* Results */}
                 {cuisineData && (
                     <section className="result-section">
                         <div className="wrapper">
@@ -88,16 +93,14 @@ function Cuisine() {
 }
 
 const CuisineCategory = ({ title, cuisines }) => (
-    <p className="cuisine-paragraph">
-        {title}:
+    <div className="cuisine-category">
+        <p className="cuisine-paragraph">{title}</p>
         <ul className="cuisine-list">
-            <li className="cuisine-item">
-                {cuisines.map(cuisine => (
-                    <span key={cuisine}>{cuisine}, </span>
-                ))}
-            </li>
+            {cuisines.map(cuisine => (
+                <li key={cuisine} className="cuisine-item">{cuisine}</li>
+            ))}
         </ul>
-    </p>
+    </div>
 );
 
 export default Cuisine;

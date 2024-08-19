@@ -1,15 +1,13 @@
-import React from "react";
-import {useEffect, useState} from "react";
-import {Link, useParams} from "react-router-dom";
-import styled from "styled-components"
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import Search from "../search/Search";
-import {Splide, SplideSlide} from "@splidejs/react-splide";
-import styles from "./Searched.module.css";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import styles from "./Searched.module.css";  // We gebruiken CSS-modules
 
 function Searched() {
     const [searchedRecipes, setSearchedRecipes] = useState([]);
-    let params = useParams();
     const [error, toggleError] = useState(false);
+    let params = useParams();
 
     const getSearched = async (name) => {
         try {
@@ -26,56 +24,35 @@ function Searched() {
 
     useEffect(() => {
         getSearched(params.search);
-    },[params.search]);
+    }, [params.search]);
 
     return (
         <div>
-        <Search />
-            {error && <> <p>Geen recepten gevonden. Probeer opnieuw.</p></>}
-            <Wrapper>
-                <h3>Hier zijn de gevonden resultaten.</h3>
+            <Search />
+            {error && <p className={styles["error-message"]}>Geen recepten gevonden. Probeer opnieuw.</p>}
+            <div className={styles["wrapper"]}>
+                <h3 className={styles["title"]}>Hier zijn de gevonden resultaten.</h3>
                 <Splide options={{
                     perPage: 4,
                     arrows: false,
                     pagination: false,
                     drag: 'free',
                     gap: "5rem"
-                }}
-                        >
-        {searchedRecipes.map((item) => {
-            return(
-                <SplideSlide key={item.id}>
-                <Card key={item.id}>
-                    <Link to={'/recipe/' + item.id}>
-                        <p className={styles["p-searched"]}>{item.title}</p>
-                        <img className={styles["img-searched"]} src={item.image} alt="" />
-
-                    </Link>
-                </Card>
-                </SplideSlide>
-            )
-        })}
+                }}>
+                    {searchedRecipes.map((item) => (
+                        <SplideSlide key={item.id}>
+                            <div className={styles["card"]}>
+                                <Link to={'/recipe/' + item.id}>
+                                    <p className={styles["p-searched"]}>{item.title}</p>
+                                    <img className={styles["img-searched"]} src={item.image} alt={item.title} />
+                                </Link>
+                            </div>
+                        </SplideSlide>
+                    ))}
                 </Splide>
-            </Wrapper>
+            </div>
         </div>
-   );
+    );
 }
-
-const Grid = styled.div`
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(20rem, 1rf));
-grid-gap: 3rem;
-`;
-
-const Wrapper = styled.div`
-  margin: 4rem 0rem;
-`
-
-const Card = styled.div`
-  min-height: 25rem;
-  border-radius: 2rem;
-  overflow: hidden;
-  position: relative;
-`;
 
 export default Searched;

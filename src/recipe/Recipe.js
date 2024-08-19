@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import styles from "./Recipe.module.css";  // We gebruiken alleen CSS modules voor alle styling
+import styles from "./Recipe.module.css";
 
 function Recipe() {
     let params = useParams();

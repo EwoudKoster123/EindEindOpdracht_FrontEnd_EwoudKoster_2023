@@ -1,27 +1,53 @@
-.img-searched {
+/* Searched.module.css */
+
+.wrapper {
+    margin: 4rem 0;
+    text-align: center;
+}
+
+.title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.card {
+    min-height: 25rem;
     border-radius: 2rem;
-    position: absolute;
-    left: 0;
+    overflow: hidden;
+    position: relative;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.p-searched {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 1rem;
+    color: #333;
+    text-align: center;
+}
+
+.img-searched {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
 }
-a {
-    text-decoration: none;
-}
-.p-searched {
-    position: absolute;
-    z-index: 10;
-    left: 50%;
-    bottom: 0%;
-    transform: translate(-50%, 0%);
-    color: white;
-    width: 100%;
+
+.error-message {
+    color: #ff4d4f;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 1rem 0;
+    background-color: #ffe6e6;
+    padding: 1rem;
+    border-radius: 5px;
     text-align: center;
-    font-weight: 600;
-    font-size: 1rem;
-    height: 40%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
