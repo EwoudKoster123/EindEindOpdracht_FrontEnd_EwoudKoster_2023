@@ -1,12 +1,8 @@
-import {useEffect, useState} from "react";
-import styled from "styled-components";
-import {useParams} from "react-router-dom";
-import styles from "./Recipe.module.css";
-
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import styles from "./Recipe.module.css";  // We gebruiken alleen CSS modules voor alle styling
 
 function Recipe() {
-
     let params = useParams();
     const [details, setDetails] = useState({});
     const [activeTab, setActiveTab] = useState("instructions");
@@ -27,60 +23,46 @@ function Recipe() {
         fetchDetails();
     }, [params.name]);
 
-    return <DetailWrapper>
-        {error && <> <p>Recepten niet gevonden.</p></>}
-        <div>
-            <h2 className={styles["h2-recipe"]}>{details.title}</h2>
-            <img src={details.image} alt="" />
+    return (
+        <div className={styles["detail-wrapper"]}>
+            {error && <p className={styles["error-message"]}>Recept niet gevonden.</p>}
+            <div className={styles["image-container"]}>
+                <h2 className={styles["h2-recipe"]}>{details.title}</h2>
+                <img src={details.image} alt={details.title} className={styles["recipe-image"]} />
+            </div>
+            <div className={styles["info"]}>
+                <button
+                    className={`${styles["tab-button"]} ${activeTab === 'instructions' ? styles["active"] : ''}`}
+                    onClick={() => setActiveTab("instructions")}
+                >
+                    Instructions
+                </button>
+                <button
+                    className={`${styles["tab-button"]} ${activeTab === 'ingredients' ? styles["active"] : ''}`}
+                    onClick={() => setActiveTab("ingredients")}
+                >
+                    Ingredients
+                </button>
+
+                {activeTab === 'instructions' && (
+                    <div className={styles["tab-content"]}>
+                        <h3 className={styles["recipe-summary"]} dangerouslySetInnerHTML={{ __html: details.summary }} />
+                        <h3 className={styles["recipe-instructions"]} dangerouslySetInnerHTML={{ __html: details.instructions }} />
+                    </div>
+                )}
+
+                {activeTab === 'ingredients' && (
+                    <ul className={styles["ingredient-list"]}>
+                        {details.extendedIngredients.map((ingredient) => (
+                            <li key={ingredient.id} className={styles["ingredient-item"]}>
+                                {ingredient.original}
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
         </div>
-        <Info>
-            <Button className={activeTab === 'instructions' ? 'active' : ''} onClick={() => setActiveTab("instructions")}>
-                Instructions
-            </Button>
-            <Button className={activeTab === 'ingredients' ? 'active' : ''} onClick={() => setActiveTab("ingredients")}>
-                Ingredients
-            </Button>
-
-            {activeTab === 'instructions' && (
-                <div>
-                    <h3 dangerouslySetInnerHTML={{__html: details.summary}}></h3>
-                    <h3 dangerouslySetInnerHTML={{__html: details.instructions}}></h3>
-                </div>
-            )}
-
-            {activeTab === 'ingredients' && (
-                <ul className={styles["ul-recipe"]}>
-                    {details.extendedIngredients.map((ingredient) => (
-                        <li className={styles["li-recipe"]} key={ingredient.id}>{ingredient.original}</li>
-                    ))}
-                </ul>
-            )
-            }
-        </Info>
-    </DetailWrapper>
+    );
 }
-
-const DetailWrapper = styled.div`
-  margin-top: 10rem;
-  margin-bottom: 5rem;
-  display: flex;
-  .active{
-    background: lightblue;
-    color: white;
-  }
-`;
-
-const Button = styled.button`
-  padding: 1rem 2rem;
-  color: #313131;
-  background: white;
-  border: 2px solid black;
-  margin-right: 2rem;
-  font-weight: 500;
-`
-
-const Info = styled.div`
-  margin-left: 10rem;
-`
 
 export default Recipe;
