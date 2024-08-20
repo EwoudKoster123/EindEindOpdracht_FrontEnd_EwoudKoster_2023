@@ -7,11 +7,9 @@ import styles from "./AllRecipes.module.css";
 import { useFetchData } from '../helpers/usefetchData';
 import { ErrorMessage } from '../helpers/ErrorMessage';
 
-const API_KEY = process.env.REACT_APP_SPOONACULAR_API_KEY;
-
 function AllRecipes() {
     const { data: allrecipes, error } = useFetchData(
-        `https://api.spoonacular.com/recipes/random?apiKey=${API_KEY}&number=10000`,
+        `https://api.spoonacular.com/recipes/random?apiKey=58d9ee76861142d19ae15d8da98f6abf&number=10000`,
         'allrecipes'
     );
 

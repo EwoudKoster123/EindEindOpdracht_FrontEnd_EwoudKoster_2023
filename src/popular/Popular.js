@@ -5,8 +5,6 @@ import './Popular.module.css';
 import { Link } from 'react-router-dom';
 import styles from './Popular.module.css';
 
-const API_KEY = process.env.REACT_APP_SPOONACULAR_API_KEY;
-
 function Popular() {
     const [popular, setPopular] = useState([]);
     const [error, setError] = useState(false);
@@ -21,7 +19,7 @@ function Popular() {
             if (cachedRecipes) {
                 setPopular(JSON.parse(cachedRecipes));
             } else {
-                const response = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${API_KEY}&number=9`);
+                const response = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=58d9ee76861142d19ae15d8da98f6abf`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
