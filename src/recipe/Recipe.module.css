@@ -106,3 +106,19 @@
     left: 0;
     color: #2a9d8f;
 }
+
+.back-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #f8b400;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.back-button:hover {
+    background-color: #f39c12;
+}
+

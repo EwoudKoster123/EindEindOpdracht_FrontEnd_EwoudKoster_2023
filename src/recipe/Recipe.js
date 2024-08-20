@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import styles from "./Recipe.module.css";
 
 function Recipe() {
+
     let params = useParams();
     const [details, setDetails] = useState({});
     const [activeTab, setActiveTab] = useState("instructions");
     const [error, toggleError] = useState(false);
+
+
 
     const fetchDetails = async () => {
         try {
@@ -22,6 +25,8 @@ function Recipe() {
     useEffect(() => {
         fetchDetails();
     }, [params.name]);
+
+
 
     return (
         <div className={styles["detail-wrapper"]}>

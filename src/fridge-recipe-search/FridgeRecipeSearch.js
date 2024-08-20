@@ -11,7 +11,7 @@ function SearchBarFridge({setFrigdeHandler}) {
     }
 
     return (
-        <FormStyle onSubmit={onFormSubmit}>
+        <formstyle className={styles["form-style"]} onSubmit={onFormSubmit}>
             <input className={styles["input-fridge"]}
                 type="text"
                 name="search"
@@ -19,12 +19,8 @@ function SearchBarFridge({setFrigdeHandler}) {
                 onChange={(e) => setFridge(e.target.value)}
                 placeholder="Wat is in uw koelkast?"
             />
-        </FormStyle>
+        </formstyle>
     );
 }
-
-const FormStyle = styled.form`
-  margin: 0rem 20rem;
-  `
 
 export default SearchBarFridge;
