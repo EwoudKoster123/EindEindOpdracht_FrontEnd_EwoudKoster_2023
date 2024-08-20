@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { Link } from "react-router-dom";
-import QuestionRecipeSearch from "../components/QuestionRecipeSearch";
+import QuestionRecipeSearch from "../question-recipesearch/QuestionRecipeSearch";
 import styles from "./QuestionRecipe.module.css";
 
 function QuestionRecipe() {

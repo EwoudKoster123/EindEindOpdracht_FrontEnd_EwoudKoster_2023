@@ -15,7 +15,8 @@ function SearchBar({setCuisineSearchHandler}) {
     return (
         <FormStyle onSubmit={onFormSubmit}>
             <div className={styles["div-cuisine"]}>
-                <input className={styles["input-cuisine"]} onChange={(e) => setCuisine(e.target.value)} type="text" value={cuisine} placeholder="Welke keuken wilt u hebben?" />
+                <input className={styles["input-cuisine"]} onChange={(e) => setCuisine(e.target.value)} type="text" value={cuisine}
+                       placeholder="Welke keuken wilt u hebben? Kies uit de keuzes hierboven." />
             </div>
         </FormStyle>
     )

@@ -101,3 +101,15 @@
     outline: none;
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
 }
+
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.password-error {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
+}

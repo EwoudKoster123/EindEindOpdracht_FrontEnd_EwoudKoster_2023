@@ -1,0 +1,30 @@
+.FormStyle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+    padding: 20px;
+    max-width: 500px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.input-question {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-question:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+.input-question::placeholder {
+    color: #aaa;
+}

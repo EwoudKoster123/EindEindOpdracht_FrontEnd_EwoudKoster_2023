@@ -12,7 +12,7 @@ function Home() {
     return (
         <>
             <main className={styles["homepage-container"]}>
-                <section>
+                <section className={styles["section-allrecipes"]}>
                     <NavLink to="/AllRecipes">
                         <HomeCard
                             image={alle_recepten}
@@ -20,7 +20,7 @@ function Home() {
                             />
                     </NavLink>
                 </section>
-                <section>
+                <section className={styles["section-popular"]}>
                     <NavLink to="/Popular">
                         <HomeCard
                             image={mostpopular}
@@ -28,7 +28,7 @@ function Home() {
                         />
                     </NavLink>
                 </section>
-                <section>
+                <section className={styles["section-cuisine"]}>
                     <NavLink to="/cuisine">
                         <HomeCard
                             image={all_recepies}
@@ -36,7 +36,7 @@ function Home() {
                         />
                     </NavLink>
                 </section>
-                <section>
+                <section className={styles["section-questionrecipe"]}>
                     <NavLink to="/questionrecipe">
                         <HomeCard
                             image={lifting_the_mood_with_good_food}
@@ -44,7 +44,7 @@ function Home() {
                         />
                     </NavLink>
                 </section>
-                <section>
+                <section className={styles["section-fridgerecipe"]}>
                     <NavLink to="/fridgerecipe">
                         <HomeCard
                             image={whats_in_the_fridge}

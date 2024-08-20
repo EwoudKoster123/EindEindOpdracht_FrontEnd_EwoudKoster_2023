@@ -1,8 +1,14 @@
 import React from 'react';
-import './Profile.module.css';
-import styles from "./Profile.module.css";
+import { useHistory } from 'react-router-dom';
+import styles from './Profile.module.css';
 
 function Profile() {
+    const history = useHistory();
+
+    const goToHomePage = () => {
+        history.push('/');
+    };
+
     return (
         <>
             <header className={styles["HeaderProfile"]} />
@@ -11,6 +17,7 @@ function Profile() {
                 <section className={styles["SectionProfile"]}>
                     <sectiontitle className={styles["SectionTitle"]}>Het is gelukt om in te loggen. U bevindt zich op een beveiligde pagina.</sectiontitle>
                 </section>
+                <button className={styles["redirect-button"]} onClick={goToHomePage}>Naar Homepagina</button>
             </main>
         </>
     );
