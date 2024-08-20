@@ -2,22 +2,29 @@
     list-style-type: none;
     margin: 0;
     padding: 2px;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1910px;
     overflow: hidden;
     background-color: lightblue;
 }
 
 .links {
     float: left;
+    margin: 0 15px;
 }
 
 .links a {
     display: block;
-    color: white;
+    color: #fff;
     text-align: center;
+    font-size: 16px;
     padding: 14px 16px;
     text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .links a:hover {
-    background-color: blue;
+    background-color: deepskyblue;
 }

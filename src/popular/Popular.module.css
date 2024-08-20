@@ -1,100 +1,89 @@
-.img-popular {
-    border-radius: 2rem;
+.container {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.wrapper {
+    margin-top: 20px;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 18px;
+    text-align: center;
+}
+
+.cardPopular {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.cardPopular:hover {
+    transform: translateY(-5px);
+}
+
+.styledLink {
+    text-decoration: none;
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.recipeTitle {
     position: absolute;
+    bottom: 0;
     left: 0;
+    right: 0;
+    margin: 0;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    text-align: center;
+    font-size: 1.2rem;
+    z-index: 10;
+}
+
+.recipeImage {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-.p-popular {
-    position: absolute;
-    z-index: 10;
-    left: 50%;
-    bottom: 0%;
-    transform: translate(-50%, 0%);
-    color: white;
-    width: 100%;
-    text-align: center;
-    font-weight: 600;
-    font-size: 1rem;
-    height: 40%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    border-radius: 15px;
 }
 
-.container{
-    padding: 2rem 0;
-    background: #f9f9f9;
-}
-
-.wrapper{
-    margin: 2rem auto;
-    max-width: 1200px
-}
-
-.title-populair{
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    color: #333;
-}
-
-.card-popular{
-    min-height: 20rem;
-    border-radius: 1rem;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.card-popular:hover{
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.gradient-popular{
+.gradientPopular {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    top: 0;
+    left: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+    z-index: 5;
 }
 
-.error-message{
-    text-align: center;
-    color: red;
-    font-weight: bold;
+.splide__arrow {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    padding: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s ease-in-out;
 }
 
-.title{
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    color: #333;
+.splide__arrow:hover {
+    background: rgba(0, 0, 0, 0.8);
 }
-
-/*.recipe-title{*/
-/*    position: absolute;*/
-/*    bottom: 0;*/
-/*    left: 0;*/
-/*    right: 0;*/
-/*    margin: 0;*/
-/*    padding: 1rem;*/
-/*    background: rgba(0, 0, 0, 0.6);*/
-/*    color: red;*/
-/*    text-align: center;*/
-/*    font-size: 10rem;*/
-/*}*/
-
-/*.recipe-image{*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    object-fit: cover;*/
-/*}*/
-
-/*.styled-link{*/
-/*    text-decoration: none;*/
-/*    display: block;*/
-/*    height: 100%;*/
-/*}*/

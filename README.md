@@ -43,10 +43,11 @@ gebruiker zou hier problemen mee hebben.
 
 # 3. Eventuele commands die je nodig zal hebben
 
-1. 'npm start' Met dit command start je de applicatie waardoor
+1.  npm install react-router-dom axios @splidejs/react-splide
+2. 'npm start' Met dit command start je de applicatie waardoor
     je de site in je webbrowser kan opzoeken.
-2. 'npm test' Met dit command test je de applicatie.
-3. 'npm run build' met dit command ga je de applicatie bouwen / starten
+3. 'npm test' Met dit command test je de applicatie.
+4. 'npm run build' met dit command ga je de applicatie bouwen / starten
     in productie.
 
 # 4. Github pagina waar project staat

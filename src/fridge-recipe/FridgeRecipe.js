@@ -4,7 +4,7 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 import { Link } from "react-router-dom";
 import FridgeRecipeSearch from "../fridge-recipe-search/FridgeRecipeSearch.js";
-import FridgeCard from "../components/FridgeCard";
+import FridgeCard from "../fridecard/FridgeCard.js";
 import whats_in_the_fridge from "../assets/whats_in_the_fridge.png";
 import "./FridgeRecipe.module.css";
 
