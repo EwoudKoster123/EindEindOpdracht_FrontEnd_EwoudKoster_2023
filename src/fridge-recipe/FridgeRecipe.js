@@ -17,7 +17,7 @@ function FridgePage() {
         const getFridgeData = async () => {
             setError(false);
             try {
-                const result = await axios.get(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${koelkast}&number=9&apiKey=58d9ee76861142d19ae15d8da98f6abf`);
+                const result = await axios.get(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${koelkast}&number=9&apiKey=${process.env.REACT_APP_API_KEY}`);
                 setFridgeData(result.data);
                 if (result.data.length === 0) {
                     throw new Error("No recipes found");

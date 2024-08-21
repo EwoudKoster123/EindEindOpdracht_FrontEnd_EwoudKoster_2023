@@ -19,7 +19,7 @@ function Popular() {
             if (cachedRecipes) {
                 setPopular(JSON.parse(cachedRecipes));
             } else {
-                const response = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=58d9ee76861142d19ae15d8da98f6abf`);
+                const response = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }

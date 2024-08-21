@@ -16,7 +16,7 @@ function Cuisine() {
             toggleError(false);
 
             try {
-                const result = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?cuisine=${keukens}&addRecipeInformation=true&apiKey=58d9ee76861142d19ae15d8da98f6abf`);
+                const result = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?cuisine=${keukens}&addRecipeInformation=true&apiKey=${process.env.REACT_APP_API_KEY}`);
                 console.log(result.data);
                 setCuisineData(result.data);
 
