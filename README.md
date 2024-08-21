@@ -15,7 +15,7 @@ zoals: Alle recepten die we hebben, de meest populaire gerechten die
 we hebben, gerechten waar jij zin in hebt en we hebben een koelkast
 waar jij de producten kan vinden die over zijn gebleven. 
 
-![img.png](src/assets/homepage.png)
+![img.png](src/assets/newHomePage.png)
 
 De koelkast wordt gebruikt om de ingredienten op te zoeken om zo tot
 een goed gerecht te komen met de ingredienten die jij nog hebt. Een
