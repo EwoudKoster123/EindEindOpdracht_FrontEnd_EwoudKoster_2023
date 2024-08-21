@@ -26,7 +26,12 @@ gebruiker zou hier problemen mee hebben.
 
 # 2. Hoe start je nou de applicatie?
 
-1. De API key is niet nodig want deze zit er automatisch al bij.
+1. We beginnen bij de API key. Hiervoor zijn een aantal stappen noodzakelijk.
+   1. Maak in de root map (op dezelfde hoogte als de .gitignore en package.json) een .env én een .env.dist file aan.
+   2. Open de .env.dist en zet daar REACT_APP_API_KEY=. De waarde laten we hier leeg. Het is conventie om environment variables in hoofdletters te schrijven.
+   3. Kopieer de naam van deze variabele en plak het in .env. Plak de waarde van de API key er direct achter (geen spaties of quotes)
+      1. De API key die wordt gebruikt is: 58d9ee76861142d19ae15d8da98f6abf
+   4. Run het commando npm run build in de terminal.
 2. Open je webbrowser en typ htpps://nodejs.org/en/ in of kopieer
    deze uit dit document en plak het in je webbrowser.
 3. Als je op de site van nodejs bent aangekomen moet je nodejs natuurlijk.
