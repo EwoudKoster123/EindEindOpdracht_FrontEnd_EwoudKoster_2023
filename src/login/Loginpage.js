@@ -72,10 +72,10 @@ function LoginPage() {
                 </button>
             </form>
 
-            <div onClick={redirectToSignup} className={styles["signup-prompt"]}>
+            <a href="/signup" className={styles["signup-prompt"]}>
                 Heeft u geen account? Klik dan:
                 <span className={styles["styled-link"]}>Signup</span>
-            </div>
+            </a>
         </>
     );
 }

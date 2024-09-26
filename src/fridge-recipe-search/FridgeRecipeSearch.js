@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import styles from './FridgeRecipeSearch.module.css';
-import styled from "styled-components";
 
 function SearchBarFridge({setFrigdeHandler}) {
     const [fridge, setFridge] = useState('');
@@ -11,7 +10,7 @@ function SearchBarFridge({setFrigdeHandler}) {
     }
 
     return (
-        <formstyle className={styles["form-style"]} onSubmit={onFormSubmit}>
+        <form className={styles["form-style"]} onSubmit={onFormSubmit}>
             <input className={styles["input-fridge"]}
                 type="text"
                 name="search"
@@ -19,7 +18,7 @@ function SearchBarFridge({setFrigdeHandler}) {
                 onChange={(e) => setFridge(e.target.value)}
                 placeholder="Wat is in uw koelkast?"
             />
-        </formstyle>
+        </form>
     );
 }
 
