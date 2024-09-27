@@ -10,7 +10,6 @@ function LoginPage() {
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const redirectToProfile = useRedirectButton('/profile');
-    const redirectToSignup = useRedirectButton('/signup');
 
     async function handleSubmit() {
         try {

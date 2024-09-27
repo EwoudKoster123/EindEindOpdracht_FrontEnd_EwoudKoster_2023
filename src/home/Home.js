@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import {NavLink} from "react-router-dom";
 import alle_recepten from "../assets/alle_recepten.jpg"
 import whats_in_the_fridge from "../assets/whats_in_the_fridge.png"

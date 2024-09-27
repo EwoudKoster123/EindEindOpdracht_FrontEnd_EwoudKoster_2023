@@ -1,4 +1,3 @@
-import React from "react";
 import './FridgeCard.css'
 
 function FridgeCard ({image}) {

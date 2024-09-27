@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import './Cuisine.module.css';
-import { Splide, SplideSlide } from "@splidejs/react-splide";
 import CuisineSearch from "../cuisine-search/CuisineSearch";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
 import styles from "./Cuisine.module.css";
 
 function Cuisine() {

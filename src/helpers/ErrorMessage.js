@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './ErrorMessage.css';
 
 export function ErrorMessage({ error, message }) {

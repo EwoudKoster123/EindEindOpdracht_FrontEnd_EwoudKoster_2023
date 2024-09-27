@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/splide/dist/css/splide.min.css';
-import './Popular.module.css';
 import { Link } from 'react-router-dom';
 import styles from './Popular.module.css';
 
