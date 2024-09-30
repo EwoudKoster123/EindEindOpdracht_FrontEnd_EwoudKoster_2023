@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, createContext, useContext } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import styles from "./Signup.module.css"
-import useRedirectButton from '../../helpers/useRedirectButton';
+import styles from "./Signup.module.css";
+
+const UserContext = createContext();
 
 function Signup() {
     const [email, setEmail] = useState('');
@@ -10,8 +11,7 @@ function Signup() {
     const [password, setPassword] = useState('');
     const [user, setRole] = useState('');
     const history = useHistory();
-    const redirectToProfile = useRedirectButton('/profile');
-
+    const { setUserDetails } = useContext(UserContext); // Toegang tot de context
 
     const SignUpUser = async (e) => {
         e.preventDefault();
@@ -23,16 +23,23 @@ function Signup() {
                 role: [user]
             });
             console.log(response);
-            history.push('/login');
+
+            setUserDetails({
+                username: userName,
+                email: email,
+                role: user,
+                token: response.data.accessToken,
+            });
+            history.push('/profile');
         } catch (error) {
             console.error('Error during signup:', error);
         }
     };
 
-    function handleLoginClick() {
+    function handleRegisterClick(e) {
+        e.preventDefault();
         if (password.length >= 6) {
-            SignUpUser();
-            redirectToProfile();
+            SignUpUser(e);
         } else {
             console.error('Het wachtwoord moet minimaal 6 tekens lang zijn!');
         }
@@ -90,10 +97,28 @@ function Signup() {
                         placeholder="gebruiker of admin"
                     />
                 </label>
-                <button className={styles["SignupButton"]} type="submit" onClick={handleLoginClick}>Register</button>
+                <button className={styles["SignupButton"]} type="submit" onClick={handleRegisterClick}>Register</button>
             </form>
         </div>
     );
 }
 
-export default Signup;
+function UserProvider({ children }) {
+    const [userDetails, setUserDetails] = useState(null);
+
+    return (
+        <UserContext.Provider value={{ userDetails, setUserDetails }}>
+            {children}
+        </UserContext.Provider>
+    );
+}
+
+function App() {
+    return (
+        <UserProvider>
+            <Signup />
+        </UserProvider>
+    );
+}
+
+export default App;
