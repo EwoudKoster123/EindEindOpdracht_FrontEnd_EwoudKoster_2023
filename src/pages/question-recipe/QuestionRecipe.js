@@ -10,7 +10,7 @@ function QuestionRecipe() {
     const [questionData, setQuestionData] = useState(null);
     const [question, setQuestion] = useState('');
     const [error, setError] = useState(false);
-    const [loading, setLoading] = useState(false); // Laadindicator state
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const getQuestionData = async () => {
@@ -20,7 +20,7 @@ function QuestionRecipe() {
             }
 
             setError(false);
-            setLoading(true); // Start met laden
+            setLoading(true);
             try {
                 const result = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?type=${question}&addRecipeInformation=true&apiKey=${process.env.REACT_APP_API_KEY}`);
                 setQuestionData(result.data);
@@ -28,7 +28,7 @@ function QuestionRecipe() {
                 console.error(e);
                 setError('Er is een fout opgetreden bij het laden van de recepten. Probeer het opnieuw.');
             } finally {
-                setLoading(false); // Stop met laden
+                setLoading(false);
             }
         };
 
@@ -49,13 +49,10 @@ function QuestionRecipe() {
                     <QuestionRecipeSearch setQuestionHandler={setQuestion} />
                 </section>
 
-                {/* Loading Spinner tijdens het ophalen van gegevens */}
                 {loading && <LoadSpinner />}
 
-                {/* Foutmelding tonen als er een fout is */}
                 {error && <p className={styles.error}>{error}</p>}
 
-                {/* Resultaten weergeven */}
                 {questionData && (
                     <section className={styles["results-section"]}>
                         <h2 className={styles["results-title"]}>Hier zijn de gevonden resultaten:</h2>
